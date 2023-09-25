@@ -1,4 +1,7 @@
 import React,{useState,useRef, useEffect} from 'react'
+import {AiFillPlayCircle, AiFillPauseCircle} from "react-icons/ai"
+import {BiSolidSkipNextCircle, BiSolidSkipPreviousCircle} from "react-icons/bi"
+import {ImLoop2} from "react-icons/im"
 
 function Player({currentSongIndex, setCurrentSongIndex, songs, setPercentProgress}) {
     const [playerState,setPlayerState] = useState({
@@ -130,10 +133,10 @@ function Player({currentSongIndex, setCurrentSongIndex, songs, setPercentProgres
         <input className='player__timeline' onChange={(e) => {changeDuration(e)}} type="range" ref={timelineRef} min={0} max={playerState.duration} defaultValue={currentTime}/>
         <div className='player__songname'><h3>{playerState.title}</h3></div>
         <div className='player__controls'>
-            <button className='player__controls__repeat btn' onClick={() => repeat()}>Repeat-{playerState.repeat}</button>
-            <button className='player__controls__prev btn' onClick={() => prev()}>Prev</button>
-            <button className='player__controls__play btn' onClick={() => switchPlayPause()}>{playerState.isPlaying ? "Pause" : "Play"}</button>
-            <button className='player__controls__next btn' onClick={() => next()}>Next</button>
+            <div className={`player__controls__repeat ${playerState.repeat === "On" ? "player__controls__repeat--active" : null}`} onClick={() => repeat()}><ImLoop2/></div>
+            <div className='player__controls__prev' onClick={() => prev()}><BiSolidSkipPreviousCircle/></div>
+            <div className='player__controls__play' onClick={() => switchPlayPause()}>{playerState.isPlaying ? <AiFillPauseCircle/> : <AiFillPlayCircle/>}</div>
+            <div className='player__controls__next' onClick={() => next()}><BiSolidSkipNextCircle/></div>
             <input className='player__controls__volume' type='range' ref={volumeRef} min={0} max={100} defaultValue={playerState.volume} onChange={(e) => volume(e)}/>
         </div>
     </div>

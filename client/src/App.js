@@ -10,6 +10,7 @@ function App() {
   const [currentSongIndex, setCurrentSongIndex] = useState(null);
   const [percentProgress, setPercentProgress] = useState(0);
   const [information, setInformation] = useState("Loading...");
+
   useEffect(() => {
     fetch("http://localhost:2000/get-song-list")
       .then((res) => res.json())

@@ -18,11 +18,13 @@ app.get("/get-song-list", (req, res) => {
     }
     files.forEach(function (file) {
       let isInArray = songs.map((e) => e.file).indexOf(file);
+      console.log(file);
       if (isInArray < 0) {
-        songs.push({
-          file,
-          path: req.protocol + "://" + req.get("host") + "/songs/" + file,
-        });
+        if (file.includes(".mp3"))
+          songs.push({
+            file,
+            path: req.protocol + "://" + req.get("host") + "/songs/" + file,
+          });
       }
     });
   });
